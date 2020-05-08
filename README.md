@@ -1,2 +1,2 @@
-# nicobod31-gmail.com
-CodinGame contest_SubMarine
+# in progress
+PacManIa mondial contest for ten days
