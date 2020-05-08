@@ -70,7 +70,7 @@ class Player {
 
             // Write an action using System.out.println()
             String nextMove = move.moveIA1(board, pacsList);
-            
+
             // *********** speed if possible ! ***********
             if (pacsList.get(0).getAbilityCooldown() == 0) {speed = true;}
             if (speed) {
