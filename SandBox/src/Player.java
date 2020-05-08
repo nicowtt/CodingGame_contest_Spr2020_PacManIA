@@ -19,6 +19,8 @@ class Player {
         board = new Board();
         move = new Move();
 
+        boolean speed = true;
+
         Scanner in = new Scanner(System.in);
         int width = in.nextInt(); // size of the grid
         int height = in.nextInt(); // top left corner is (x=0, y=0)
@@ -51,8 +53,8 @@ class Player {
                 String typeId = in.next(); // unused in wood leagues
                 int speedTurnsLeft = in.nextInt(); // unused in wood leagues
                 int abilityCooldown = in.nextInt(); // unused in wood leagues
-                pac = new Pac(pacId,mine,x,y);
-                pacsList.add(pac);
+                pac = new Pac(pacId,mine,x,y, speedTurnsLeft, abilityCooldown);
+                if (pac.isMine()) { pacsList.add(pac); }
             }
             int visiblePelletCount = in.nextInt(); // all pellets in sight
             board.setNbrOfPast(visiblePelletCount);
@@ -67,8 +69,15 @@ class Player {
             board.setPastsList(pastsList);
 
             // Write an action using System.out.println()
-            // To debug: System.err.println("Debug messages...");
             String nextMove = move.moveIA1(board, pacsList);
+            
+            // *********** speed if possible ! ***********
+            if (pacsList.get(0).getAbilityCooldown() == 0) {speed = true;}
+            if (speed) {
+                nextMove = move.moveWithSpeed(pacsList);
+                speed = false;
+            }
+
             System.out.println(nextMove); // MOVE <pacId> <x> <y>
         }
     }

@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Random;
 
 class Move {
     Utils utils = new Utils();
@@ -35,27 +36,31 @@ class Move {
                     move += " MOVE " + myPacList.get(i).getPacId() + " " + bestPast.getPastX() + " " + bestPast.getPastY() + "|";
                 }
             } else {
+                Random rand = new Random();
+
                 // random move where is possible
                 System.err.println("pac " + myPacList.get(i).getPacId() + " move aléatoirement");
-                return this.moveIfNoPast(board, myPacList.get(i));
+                // list of future possible move
+                List<Cell> listAllPossibleMove = utils.getListAllPossibleMove(board, myPacList.get(i));
+                // limit for random
+                int max = listAllPossibleMove.size() - 1;
+                int min = 0;
+                int randomCellInt = rand.nextInt(max - min + 1) + min;
+                if (listAllPossibleMove.size() > 0) {
+                    move += " MOVE " + myPacList.get(i).getPacId() + " "
+                            + listAllPossibleMove.get(randomCellInt).getX() + " "
+                            + listAllPossibleMove.get(randomCellInt).getY() + "|";
+                }
             }
         }
         return move;
     }
 
-    /**
-     * Random move if no past !!!
-     * @param board
-     * @param pac
-     * @return
-     */
-    public String moveIfNoPast(Board board, Pac pac) {
-        // list of future possible move
-        List<Cell> listAllPossibleMove = utils.getListAllPossibleMove(board, pac);
-        if (listAllPossibleMove.size() > 0) {
-            return "MOVE " + pac.getPacId() + " " + listAllPossibleMove.get(0).getX() + " " + listAllPossibleMove.get(0).getY() + "|";
-        } else {
-            return "";
+    public String moveWithSpeed(List<Pac> pacsList) {
+        String move = "";
+        for (int i = 0; i < pacsList.size() ; i++) {
+            move += " SPEED " + pacsList.get(i).getPacId() + "|";
         }
+        return move;
     }
 }

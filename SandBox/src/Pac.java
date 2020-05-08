@@ -3,17 +3,21 @@ class Pac {
     private boolean mine;
     private int posX;
     private int posY;
+    private int speedTurnsLeft;
+    private int abilityCooldown;
 
 
     // constructor
     public Pac() {
     }
 
-    public Pac(int pacId, boolean mine, int posX, int posY) {
+    public Pac(int pacId, boolean mine, int posX, int posY, int speedTurnsLeft, int abilityCooldown) {
         this.pacId = pacId;
         this.mine = mine;
         this.posX = posX;
         this.posY = posY;
+        this.speedTurnsLeft = speedTurnsLeft;
+        this.abilityCooldown = abilityCooldown;
     }
 
     // getters and setters
@@ -49,6 +53,22 @@ class Pac {
         this.posY = posY;
     }
 
+    public int getSpeedTurnsLeft() {
+        return speedTurnsLeft;
+    }
+
+    public void setSpeedTurnsLeft(int speedTurnsLeft) {
+        this.speedTurnsLeft = speedTurnsLeft;
+    }
+
+    public int getAbilityCooldown() {
+        return abilityCooldown;
+    }
+
+    public void setAbilityCooldown(int abilityCooldown) {
+        this.abilityCooldown = abilityCooldown;
+    }
+
     // to string
     @Override
     public String toString() {
@@ -57,6 +77,8 @@ class Pac {
                 ", mine=" + mine +
                 ", posX=" + posX +
                 ", posY=" + posY +
+                ", speedTurnsLeft=" + speedTurnsLeft +
+                ", abilityCooldown=" + abilityCooldown +
                 '}';
     }
 }
