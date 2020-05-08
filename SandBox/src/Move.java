@@ -53,7 +53,7 @@ class Move {
         // list of future possible move
         List<Cell> listAllPossibleMove = utils.getListAllPossibleMove(board, pac);
         if (listAllPossibleMove.size() > 0) {
-            return "MOVE " + listAllPossibleMove.get(0).getX() + listAllPossibleMove.get(0).getY();
+            return "MOVE " + pac.getPacId() + " " + listAllPossibleMove.get(0).getX() + " " + listAllPossibleMove.get(0).getY() + "|";
         } else {
             return "";
         }
