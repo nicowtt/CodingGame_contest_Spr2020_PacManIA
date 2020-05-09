@@ -1,13 +1,18 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 class Move {
     Utils utils = new Utils();
+    List<Cell> lockedCells;
+
 
     /**
      * move to big value past first
      * then litle value pas
      * then random
+     * Speed if possible
      * @param board
      * @param pacsList
      * @return
@@ -15,42 +20,44 @@ class Move {
     public String moveIA1(Board board, List<Pac> pacsList) {
         String move = "";
         List<Pac> myPacList = utils.getOnlyMyPac(pacsList);
+        lockedCells = new ArrayList<>();
+
+        List<Past> listPastTen = utils.getListPastTen(board.getPastsList(), pacsList);
+        List<Past> listPastOne = utils.getListPastOne(board.getPastsList());
 
         for (int i = 0; i < myPacList.size(); i++) {
-            Past bestPast = new Past();
-            List<Past> listPastTen = utils.getListPastTen(board.getPastsList());
-            List<Past> listPastOne = utils.getListPastOne(board.getPastsList());
+
+            // remove other locked cell from other pac
+            List<Past> listPastTenWhitoutLocked = utils.removeLockedPast(listPastTen,lockedCells);
+//            System.err.println("listPastTenWithoutLocked= " + listPastTenWhitoutLocked.toString() );
+            // remove other locked cell from other pacs
+            List<Past> listPastOneWithoutLocked = utils.removeLockedPast(listPastOne,lockedCells);
+
             // if there is 10 value past
             if (listPastTen.size() > 0 ) {
-                bestPast = utils.getClosedPastWithValueTen(board, myPacList.get(i));
-                // check
-                System.err.println("best 10 past for pac" + myPacList.get(i).getPacId() + " =" + bestPast);
-
+                Past bestPast = utils.getClosedPastWithValueTen(listPastTenWhitoutLocked, myPacList.get(i));
+                myPacList.get(i).setLockedCell(new Cell(bestPast.getPastX(), bestPast.getPastY(), null));
+                lockedCells.add(new Cell(bestPast.getPastX(), bestPast.getPastY(), null));
+//                System.err.println("locked cell: " + pacsList.get(i).getLockedCell().toString());
                 move += " MOVE " + myPacList.get(i).getPacId() + " " + bestPast.getPastX() + " " + bestPast.getPastY() + "|";
+
+                // check
+                System.err.println("best 10 pac" + myPacList.get(i).getPacId() + " =" + bestPast);
+
             } else if (listPastOne.size() > 0){
                 //if there is 1 value past
                 if (listPastOne .size() > 0) {
-                    bestPast = utils.getClosedPastWithValueOne(board, myPacList.get(i));
-                    // check
-                    System.err.println("best 1 past for pac" + myPacList.get(i).getPacId() + " =" + bestPast);
+                    Past bestPast = utils.getClosedPastWithValueOne(listPastOneWithoutLocked, myPacList.get(i));
+                    myPacList.get(i).setLockedCell(new Cell(bestPast.getPastX(), bestPast.getPastY(), null));
+                    lockedCells.add(new Cell(bestPast.getPastX(), bestPast.getPastY(), null));
+
                     move += " MOVE " + myPacList.get(i).getPacId() + " " + bestPast.getPastX() + " " + bestPast.getPastY() + "|";
+
+                    // check
+                    System.err.println("best 1 pac" + myPacList.get(i).getPacId() + " =" + bestPast);
                 }
             } else {
-                Random rand = new Random();
-
-                // random move where is possible
-                System.err.println("pac " + myPacList.get(i).getPacId() + " move aléatoirement");
-                // list of future possible move
-                List<Cell> listAllPossibleMove = utils.getListAllPossibleMove(board, myPacList.get(i));
-                // limit for random
-                int max = listAllPossibleMove.size() - 1;
-                int min = 0;
-                int randomCellInt = rand.nextInt(max - min + 1) + min;
-                if (listAllPossibleMove.size() > 0) {
-                    move += " MOVE " + myPacList.get(i).getPacId() + " "
-                            + listAllPossibleMove.get(randomCellInt).getX() + " "
-                            + listAllPossibleMove.get(randomCellInt).getY() + "|";
-                }
+                move += this.randomMove(board, myPacList.get(i));
             }
         }
         return move;
@@ -63,4 +70,25 @@ class Move {
         }
         return move;
     }
+
+    public String randomMove(Board board, Pac myPac) {
+        Random rand = new Random();
+        String move = "";
+
+        // random move where is possible
+        System.err.println("pac " + myPac.getPacId() + " move aléatoirement");
+        // list of future possible move
+        List<Cell> listAllPossibleMove = utils.getListAllPossibleMove(board, myPac);
+        // limit for random
+        int max = listAllPossibleMove.size() - 1;
+        int min = 0;
+        int randomCellInt = rand.nextInt(max - min + 1) + min;
+        if (listAllPossibleMove.size() > 0) {
+            move += " MOVE " + myPac.getPacId() + " "
+                    + listAllPossibleMove.get(randomCellInt).getX() + " "
+                    + listAllPossibleMove.get(randomCellInt).getY() + "|";
+        }
+        return move;
+    }
+
 }

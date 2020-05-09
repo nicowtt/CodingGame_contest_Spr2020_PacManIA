@@ -5,19 +5,21 @@ class Pac {
     private int posY;
     private int speedTurnsLeft;
     private int abilityCooldown;
+    private Cell lockedCell;
 
 
     // constructor
     public Pac() {
     }
 
-    public Pac(int pacId, boolean mine, int posX, int posY, int speedTurnsLeft, int abilityCooldown) {
+    public Pac(int pacId, boolean mine, int posX, int posY, int speedTurnsLeft, int abilityCooldown, Cell lockedCell) {
         this.pacId = pacId;
         this.mine = mine;
         this.posX = posX;
         this.posY = posY;
         this.speedTurnsLeft = speedTurnsLeft;
         this.abilityCooldown = abilityCooldown;
+        this.lockedCell = lockedCell;
     }
 
     // getters and setters
@@ -67,6 +69,14 @@ class Pac {
 
     public void setAbilityCooldown(int abilityCooldown) {
         this.abilityCooldown = abilityCooldown;
+    }
+
+    public Cell getLockedCell() {
+        return lockedCell;
+    }
+
+    public void setLockedCell(Cell lockedCell) {
+        this.lockedCell = lockedCell;
     }
 
     // to string

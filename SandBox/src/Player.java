@@ -53,7 +53,7 @@ class Player {
                 String typeId = in.next(); // unused in wood leagues
                 int speedTurnsLeft = in.nextInt(); // unused in wood leagues
                 int abilityCooldown = in.nextInt(); // unused in wood leagues
-                pac = new Pac(pacId,mine,x,y, speedTurnsLeft, abilityCooldown);
+                pac = new Pac(pacId,mine,x,y, speedTurnsLeft, abilityCooldown, new Cell(0,0,null));
                 if (pac.isMine()) { pacsList.add(pac); }
             }
             int visiblePelletCount = in.nextInt(); // all pellets in sight
