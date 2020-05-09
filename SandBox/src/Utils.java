@@ -86,19 +86,24 @@ class Utils {
             moveCell.add(cell);
         }
         // East
-        if (map[pac.getPosX() + 1][pac.getPosY()] == GROUND) {
-            Cell cell = new Cell(pac.getPosX() + 1 , pac.getPosY(), "E");
-            moveCell.add(cell);
+        if (pac.getPosX() != board.getNbrCellX() - 1) {
+            if (map[pac.getPosX() + 1][pac.getPosY()] == GROUND) {
+                Cell cell = new Cell(pac.getPosX() + 1 , pac.getPosY(), "E");
+                moveCell.add(cell);
+            }
         }
+
         // South
         if (map[pac.getPosX()][pac.getPosY() + 1] == GROUND) {
             Cell cell = new Cell(pac.getPosX(), pac.getPosY() + 1, "S");
             moveCell.add(cell);
         }
         // West
-        if (map[pac.getPosX() - 1][pac.getPosY()] == GROUND) {
-            Cell cell = new Cell(pac.getPosX() - 1, pac.getPosY(), "W");
-            moveCell.add(cell);
+        if (pac.getPosX() != 0) {
+            if (map[pac.getPosX() - 1][pac.getPosY()] == GROUND) {
+                Cell cell = new Cell(pac.getPosX() - 1, pac.getPosY(), "W");
+                moveCell.add(cell);
+            }
         }
         return moveCell;
     }
