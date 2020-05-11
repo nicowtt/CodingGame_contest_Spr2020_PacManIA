@@ -2,16 +2,14 @@ class Cell {
 
     private int x;
     private int y;
-    private String cardinalPoint;
 
     // constructor
     public Cell() {
     }
 
-    public Cell(int x, int y, String cardinalPoint) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.cardinalPoint = cardinalPoint;
     }
 
     // getters and setters
@@ -31,21 +29,12 @@ class Cell {
         this.y = y;
     }
 
-    public String getCardinalPoint() {
-        return cardinalPoint;
-    }
-
-    public void setCardinalPoint(String cardinalPoint) {
-        this.cardinalPoint = cardinalPoint;
-    }
-
     // to string
     @Override
     public String toString() {
         return "Cell{" +
                 "x=" + x +
                 ", y=" + y +
-                ", cardinalPoint='" + cardinalPoint + '\'' +
                 '}';
     }
 }

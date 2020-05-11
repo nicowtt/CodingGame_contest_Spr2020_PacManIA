@@ -45,16 +45,6 @@ class Utils {
         return abs(c.getPastX() - other.getPastX()) + abs(c.getPastY() - other.getPastY());
     }
 
-    public List<Pac> getOnlyMyPac(List<Pac> pacList) {
-        List<Pac> myPacList = new ArrayList<>();
-        for (int i = 0; i < pacList.size(); i++) {
-            if (pacList.get(i).isMine()) {
-                myPacList.add(pacList.get(i));
-            }
-        }
-        return myPacList;
-    }
-
     public List<Past> getListPastTen(List<Past> allPastList, List<Pac> pacsList) {
         List<Past> listPastTen = new ArrayList<>();
         for (int i = 0; i < allPastList.size(); i++) {
@@ -80,26 +70,26 @@ class Utils {
         List<Cell> moveCell = new ArrayList<>();
         // North
         if (map[pac.getPosX()][pac.getPosY() - 1] == GROUND) {
-            Cell cell = new Cell(pac.getPosX(), pac.getPosY() - 1, "N");
+            Cell cell = new Cell(pac.getPosX(), pac.getPosY() - 1);
             moveCell.add(cell);
         }
         // East
         if (pac.getPosX() != board.getNbrCellX() - 1) {
             if (map[pac.getPosX() + 1][pac.getPosY()] == GROUND) {
-                Cell cell = new Cell(pac.getPosX() + 1 , pac.getPosY(), "E");
+                Cell cell = new Cell(pac.getPosX() + 1 , pac.getPosY());
                 moveCell.add(cell);
             }
         }
 
         // South
         if (map[pac.getPosX()][pac.getPosY() + 1] == GROUND) {
-            Cell cell = new Cell(pac.getPosX(), pac.getPosY() + 1, "S");
+            Cell cell = new Cell(pac.getPosX(), pac.getPosY() + 1);
             moveCell.add(cell);
         }
         // West
         if (pac.getPosX() != 0) {
             if (map[pac.getPosX() - 1][pac.getPosY()] == GROUND) {
-                Cell cell = new Cell(pac.getPosX() - 1, pac.getPosY(), "W");
+                Cell cell = new Cell(pac.getPosX() - 1, pac.getPosY());
                 moveCell.add(cell);
             }
         }
@@ -124,17 +114,15 @@ class Utils {
                 }
             }
             return listPastIn;
-
         } else {
             return listPastIn;
         }
-
     }
 
     public List<Cell> getLockedCell(List<Pac> pacsList) {
         List<Cell> lockedcells = new ArrayList<>();
         for (int i = 0; i < pacsList.size(); i++) {
-            Cell cell = new Cell(pacsList.get(i).getPosX(), pacsList.get(i).getPosY(), null);
+            Cell cell = new Cell(pacsList.get(i).getPosX(), pacsList.get(i).getPosY());
             lockedcells.add(cell);
         }
         return lockedcells;
@@ -193,5 +181,17 @@ class Utils {
 
     public void removeMyPacIfNotUpdated(Board board) {
         board.getMyPac().removeIf(pac -> !pac.isUpdated());
+    }
+
+    public boolean checkIfPacIsBlock(Pac pacIn) {
+        Cell previouscell = new Cell(pacIn.getPreviousPos().getX(), pacIn.getPreviousPos().getY());
+        Cell actualCell = new Cell(pacIn.getPosX(), pacIn.getPosY());
+
+        if((previouscell.getX() == actualCell.getX()) &&
+            previouscell.getY() == actualCell.getY()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
