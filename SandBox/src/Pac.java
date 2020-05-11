@@ -6,13 +6,15 @@ class Pac {
     private int speedTurnsLeft;
     private int abilityCooldown;
     private Cell lockedCell;
+    private boolean updated;
+    private Cell previousPos;
 
 
     // constructor
     public Pac() {
     }
 
-    public Pac(int pacId, boolean mine, int posX, int posY, int speedTurnsLeft, int abilityCooldown, Cell lockedCell) {
+    public Pac(int pacId, boolean mine, int posX, int posY, int speedTurnsLeft, int abilityCooldown, Cell lockedCell, boolean updated, Cell previousPos) {
         this.pacId = pacId;
         this.mine = mine;
         this.posX = posX;
@@ -20,6 +22,8 @@ class Pac {
         this.speedTurnsLeft = speedTurnsLeft;
         this.abilityCooldown = abilityCooldown;
         this.lockedCell = lockedCell;
+        this.updated = updated;
+        this.previousPos = previousPos;
     }
 
     // getters and setters
@@ -79,6 +83,22 @@ class Pac {
         this.lockedCell = lockedCell;
     }
 
+    public boolean isUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
+    }
+
+    public Cell getPreviousPos() {
+        return previousPos;
+    }
+
+    public void setPreviousPos(Cell previousPos) {
+        this.previousPos = previousPos;
+    }
+
     // to string
     @Override
     public String toString() {
@@ -89,6 +109,8 @@ class Pac {
                 ", posY=" + posY +
                 ", speedTurnsLeft=" + speedTurnsLeft +
                 ", abilityCooldown=" + abilityCooldown +
+                ", updated=" + updated +
+                ", previousPos=" + previousPos +
                 '}';
     }
 }

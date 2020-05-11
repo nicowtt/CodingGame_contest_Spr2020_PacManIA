@@ -11,36 +11,24 @@ class Board {
     private int map[][];
     private int nbrOfPast;
     private List<Past> pastsList;
+    private List<Pac> myPac;
+    private List<Pac> opponentPac;
 
     // constructor
     public Board() {
     }
 
-    public Board(int nbrCellX, int nbrCellY, int[][] map, int nbrOfPast, List<Past> pastsList) {
+    public Board(int nbrCellX, int nbrCellY, int[][] map, int nbrOfPast, List<Past> pastsList, List<Pac> myPac, List<Pac> opponentPac) {
         this.nbrCellX = nbrCellX;
         this.nbrCellY = nbrCellY;
         this.map = map;
         this.nbrOfPast = nbrOfPast;
         this.pastsList = pastsList;
+        this.myPac = myPac;
+        this.opponentPac = opponentPac;
     }
 
     // getters and setters
-    public static int getGROUND() {
-        return GROUND;
-    }
-
-    public static void setGROUND(int GROUND) {
-        Board.GROUND = GROUND;
-    }
-
-    public static int getWALL() {
-        return WALL;
-    }
-
-    public static void setWALL(int WALL) {
-        Board.WALL = WALL;
-    }
-
     public int getNbrCellX() {
         return nbrCellX;
     }
@@ -81,6 +69,22 @@ class Board {
         this.pastsList = pastsList;
     }
 
+    public List<Pac> getMyPac() {
+        return myPac;
+    }
+
+    public void setMyPac(List<Pac> myPac) {
+        this.myPac = myPac;
+    }
+
+    public List<Pac> getOpponentPac() {
+        return opponentPac;
+    }
+
+    public void setOpponentPac(List<Pac> opponentPac) {
+        this.opponentPac = opponentPac;
+    }
+
     // to string
     @Override
     public String toString() {
@@ -89,6 +93,9 @@ class Board {
                 ", nbrCellY=" + nbrCellY +
                 ", map=" + Arrays.toString(map) +
                 ", nbrOfPast=" + nbrOfPast +
+                ", pastsList=" + pastsList +
+                ", myPac=" + myPac +
+                ", opponentPac=" + opponentPac +
                 '}';
     }
 

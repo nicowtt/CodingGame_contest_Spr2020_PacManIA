@@ -1,8 +1,6 @@
 import java.rmi.ServerError;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.StrictMath.abs;
 
@@ -140,5 +138,60 @@ class Utils {
             lockedcells.add(cell);
         }
         return lockedcells;
+    }
+
+    public void addPacOnMyListPac(Board board, Pac pacIn) {
+        boolean pacIsPresent = false;
+        Pac pacToUpdate;
+
+        if (board.getMyPac().isEmpty()) {
+//            System.err.println("first pass");
+            pacIn.setUpdated(true);
+            board.getMyPac().add(pacIn);
+        } else {
+            for (int i = 0; i < board.getMyPac().size(); i++) {
+                if (board.getMyPac().get(i).getPacId() == pacIn.getPacId()) {
+                    pacIsPresent = true;
+                }
+            }
+            if (!pacIsPresent) { // add pac
+//                System.err.println("ajout pac" + pacIn.getPacId());
+                pacIn.setUpdated(true);
+                board.getMyPac().add(pacIn);
+            } else { // update pac
+                for (int i = 0; i < board.getMyPac().size(); i++) {
+                    if (board.getMyPac().get(i).getPacId() == pacIn.getPacId()) {
+                        pacToUpdate = board.getMyPac().get(i);
+                        this.updatePac(pacToUpdate, pacIn);
+                    }
+                }
+            }
+        }
+    }
+
+    public Pac updatePac(Pac pacToUpdate, Pac newPac) {
+        Cell previousPos = new Cell();
+        pacToUpdate.setAbilityCooldown(newPac.getAbilityCooldown());
+        pacToUpdate.setSpeedTurnsLeft(newPac.getSpeedTurnsLeft());
+        pacToUpdate.setLockedCell(newPac.getLockedCell());
+        // set previous position
+        previousPos.setX(pacToUpdate.getPosX());
+        previousPos.setY(pacToUpdate.getPosY());
+        pacToUpdate.setPreviousPos(previousPos);
+        // new pos
+        pacToUpdate.setPosX(newPac.getPosX());
+        pacToUpdate.setPosY(newPac.getPosY());
+
+        pacToUpdate.setUpdated(true);
+
+        return pacToUpdate;
+    }
+
+    public void allMyPacUpdatedFalse(Board board) {
+        for (Pac pac: board.getMyPac()) { pac.setUpdated(false); }
+    }
+
+    public void removeMyPacIfNotUpdated(Board board) {
+        board.getMyPac().removeIf(pac -> !pac.isUpdated());
     }
 }
