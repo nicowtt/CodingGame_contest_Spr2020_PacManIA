@@ -157,11 +157,41 @@ class Utils {
         }
     }
 
+    public void addPacOnOpponentListPac(Board board, Pac pacIn) {
+        boolean pacIsPresent = false;
+        Pac pacToUpdate;
+
+        if (board.getOpponentPac().isEmpty()) {
+//            System.err.println("first pass");
+            pacIn.setUpdated(true);
+            board.getOpponentPac().add(pacIn);
+        } else {
+            for (int i = 0; i < board.getOpponentPac().size(); i++) {
+                if (board.getOpponentPac().get(i).getPacId() == pacIn.getPacId()) {
+                    pacIsPresent = true;
+                }
+            }
+            if (!pacIsPresent) { // add pac
+//                System.err.println("ajout pac" + pacIn.getPacId());
+                pacIn.setUpdated(true);
+                board.getOpponentPac().add(pacIn);
+            } else { // update pac
+                for (int i = 0; i < board.getOpponentPac().size(); i++) {
+                    if (board.getOpponentPac().get(i).getPacId() == pacIn.getPacId()) {
+                        pacToUpdate = board.getOpponentPac().get(i);
+                        this.updatePac(pacToUpdate, pacIn);
+                    }
+                }
+            }
+        }
+    }
+
     public Pac updatePac(Pac pacToUpdate, Pac newPac) {
         Cell previousPos = new Cell();
         pacToUpdate.setAbilityCooldown(newPac.getAbilityCooldown());
         pacToUpdate.setSpeedTurnsLeft(newPac.getSpeedTurnsLeft());
         pacToUpdate.setLockedCell(newPac.getLockedCell());
+        pacToUpdate.setTypeId(newPac.getTypeId());
         // set previous position
         previousPos.setX(pacToUpdate.getPosX());
         previousPos.setY(pacToUpdate.getPosY());
@@ -179,8 +209,16 @@ class Utils {
         for (Pac pac: board.getMyPac()) { pac.setUpdated(false); }
     }
 
+    public void allOpponentPacUpdatedFalse(Board board) {
+        for (Pac pac: board.getOpponentPac()) { pac.setUpdated(false); }
+    }
+
     public void removeMyPacIfNotUpdated(Board board) {
         board.getMyPac().removeIf(pac -> !pac.isUpdated());
+    }
+
+    public void removeOpponentPacIfNotUpdated(Board board) {
+        board.getOpponentPac().removeIf(pac -> !pac.isUpdated());
     }
 
     public boolean checkIfPacIsBlock(Pac pacIn) {
@@ -189,6 +227,14 @@ class Utils {
 
         if((previouscell.getX() == actualCell.getX()) &&
             previouscell.getY() == actualCell.getY()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkIfAbilityCooldownIsOk(Pac pacIn) {
+        if (pacIn.getAbilityCooldown() == 0) {
             return true;
         } else {
             return false;

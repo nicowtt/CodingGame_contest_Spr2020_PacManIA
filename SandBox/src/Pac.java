@@ -3,6 +3,7 @@ class Pac {
     private boolean mine;
     private int posX;
     private int posY;
+    private String typeId;
     private int speedTurnsLeft;
     private int abilityCooldown;
     private Cell lockedCell;
@@ -14,11 +15,12 @@ class Pac {
     public Pac() {
     }
 
-    public Pac(int pacId, boolean mine, int posX, int posY, int speedTurnsLeft, int abilityCooldown, Cell lockedCell, boolean updated, Cell previousPos) {
+    public Pac(int pacId, boolean mine, int posX, int posY, String typeId, int speedTurnsLeft, int abilityCooldown, Cell lockedCell, boolean updated, Cell previousPos) {
         this.pacId = pacId;
         this.mine = mine;
         this.posX = posX;
         this.posY = posY;
+        this.typeId = typeId;
         this.speedTurnsLeft = speedTurnsLeft;
         this.abilityCooldown = abilityCooldown;
         this.lockedCell = lockedCell;
@@ -57,6 +59,14 @@ class Pac {
 
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
     }
 
     public int getSpeedTurnsLeft() {
@@ -107,6 +117,7 @@ class Pac {
                 ", mine=" + mine +
                 ", posX=" + posX +
                 ", posY=" + posY +
+                ", typeId=" + typeId +
                 ", speedTurnsLeft=" + speedTurnsLeft +
                 ", abilityCooldown=" + abilityCooldown +
                 ", updated=" + updated +

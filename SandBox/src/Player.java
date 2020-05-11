@@ -56,13 +56,17 @@ class Player {
                 int y = in.nextInt(); // position in the grid
                 pac.setPosY(y);
                 String typeId = in.next(); // unused in wood leagues
+                pac.setTypeId(typeId);
                 int speedTurnsLeft = in.nextInt(); // unused in wood leagues
                 pac.setSpeedTurnsLeft(speedTurnsLeft);
                 int abilityCooldown = in.nextInt(); // unused in wood leagues
                 pac.setAbilityCooldown(abilityCooldown);
                 if (pac.isMine()) { utils.addPacOnMyListPac(board, pac);}
+                if (!pac.isMine()) { utils.addPacOnOpponentListPac(board, pac);}
             }
             utils.removeMyPacIfNotUpdated(board);
+            utils.removeOpponentPacIfNotUpdated(board);
+
             int visiblePelletCount = in.nextInt(); // all pellets in sight
             board.setNbrOfPast(visiblePelletCount);
             List<Past> pastsList = new ArrayList<>();
@@ -75,21 +79,14 @@ class Player {
             }
             board.setPastsList(pastsList);
             System.err.println("myPac on board: " + board.getMyPac().toString());
-
+            System.err.println("Opponent pac on board: " + board.getOpponentPac().toString());
 
             // Write an action using System.out.println()
-            String nextMove = move.moveIA1(board);
+            System.out.println(move.moveIA1(board)); // MOVE <pacId> <x> <y>
 
-            // *********** speed if possible ! ***********
-            if (board.getMyPac().get(0).getAbilityCooldown() == 0) {speed = true;}
-            if (speed) {
-                nextMove = move.moveWithSpeed(board.getMyPac());
-                speed = false;
-            }
-
-            System.out.println(nextMove); // MOVE <pacId> <x> <y>
-            // reset my pac
+            // reset all pacs
             utils.allMyPacUpdatedFalse(board);
+            utils.allOpponentPacUpdatedFalse(board);
         }
     }
 }
