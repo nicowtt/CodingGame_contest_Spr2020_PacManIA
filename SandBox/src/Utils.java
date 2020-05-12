@@ -1,6 +1,4 @@
-import java.rmi.ServerError;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.lang.StrictMath.abs;
 
@@ -193,9 +191,13 @@ class Utils {
         pacToUpdate.setLockedCell(newPac.getLockedCell());
         pacToUpdate.setTypeId(newPac.getTypeId());
         // set previous position
-        previousPos.setX(pacToUpdate.getPosX());
-        previousPos.setY(pacToUpdate.getPosY());
-        pacToUpdate.setPreviousPos(previousPos);
+        if (pacToUpdate.isTypeNotChange()) {
+            previousPos.setX(pacToUpdate.getPosX());
+            previousPos.setY(pacToUpdate.getPosY());
+            pacToUpdate.setPreviousPos(previousPos);
+            pacToUpdate.setTypeNotChange(false);
+        }
+
         // new pos
         pacToUpdate.setPosX(newPac.getPosX());
         pacToUpdate.setPosY(newPac.getPosY());

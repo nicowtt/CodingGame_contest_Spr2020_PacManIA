@@ -25,6 +25,8 @@ class Move {
         List<Past> listPastOne = utils.getListPastOne(board.getPastsList());
 
         for (int i = 0; i < board.getMyPac().size(); i++) {
+            board.getMyPac().get(i).setTypeNotChange(true);
+
             // ckeck
             if (board.getMyPac().get(i).getPreviousPos() != null) {
                 pacIsBlock = utils.checkIfPacIsBlock(board.getMyPac().get(i));
@@ -32,22 +34,25 @@ class Move {
             availabilityCooldown = utils.checkIfAbilityCooldownIsOk(board.getMyPac().get(i));
 
             // remove other locked cell from other pac
-            List<Past> listPastTenWhitoutLocked = utils.removeLockedPast(listPastTen,lockedCells);
+//            List<Past> listPastTenWhitoutLocked = utils.removeLockedPast(listPastTen,lockedCells);
             List<Past> listPastOneWithoutLocked = utils.removeLockedPast(listPastOne,lockedCells);
 
             // if there is 10 value past on the map
             if (listPastTen.size() > 0 ) {
-                Past bestPast = utils.getClosedPastWithValueTen(listPastTenWhitoutLocked, board.getMyPac().get(i));
+                Past bestPast = utils.getClosedPastWithValueTen(listPastTen, board.getMyPac().get(i));
                 board.getMyPac().get(i).setLockedCell(new Cell(bestPast.getPastX(), bestPast.getPastY()));
                 lockedCells.add(new Cell(bestPast.getPastX(), bestPast.getPastY()));
 
                 if (pacIsBlock) { move += this.randomMoveAvoidLastPosition(board, board.getMyPac().get(i)); }
-                else if (availabilityCooldown){ move += this.speedOrSwitch(board, board.getMyPac().get(i));}
+                else if (availabilityCooldown){
+                    move += this.speedOrSwitch(board, board.getMyPac().get(i));
+                    board.getMyPac().get(i).setTypeNotChange(false);
+                }
                 else {move += " MOVE " + board.getMyPac().get(i).getPacId() + " " + bestPast.getPastX() + " "
                         + bestPast.getPastY() + "|"; }
 
                 // check
-//                System.err.println("best 10 pac" + board.getMyPac().get(i).getPacId() + " =" + bestPast);
+                System.err.println("best 10 pac" + board.getMyPac().get(i).getPacId() + " =" + bestPast);
 
             } else if (listPastOne.size() > 0){
                 // if there is 1 value past on the map
@@ -57,12 +62,15 @@ class Move {
                     lockedCells.add(new Cell(bestPast.getPastX(), bestPast.getPastY()));
 
                     if (pacIsBlock) { move += this.randomMoveAvoidLastPosition(board, board.getMyPac().get(i)); }
-                    else if (availabilityCooldown){ move += this.speedOrSwitch(board, board.getMyPac().get(i)); }
+                    else if (availabilityCooldown){
+                        move += this.speedOrSwitch(board, board.getMyPac().get(i));
+                        board.getMyPac().get(i).setTypeNotChange(false);
+                    }
                     else {move += " MOVE " + board.getMyPac().get(i).getPacId() + " " + bestPast.getPastX() + " "
                             + bestPast.getPastY() + "|";}
 
                     // check
-//                    System.err.println("best 1 pac" + board.getMyPac().get(i).getPacId() + " =" + bestPast);
+                    System.err.println("best 1 pac" + board.getMyPac().get(i).getPacId() + " =" + bestPast);
                 }
             } else {
                 if (availabilityCooldown) { move += this.speedOrSwitch(board, board.getMyPac().get(i)); }
@@ -171,9 +179,23 @@ class Move {
                 return toRock;
             }
             else if ((oppType.equals("PAPER")) && (myPac.getTypeId().equals("ROCK"))) {
-                System.err.println("myPac try to change rock... ");
+                System.err.println("myPac try to change scissor... ");
                 return toScissor;
             }
+            // if same type as me i can eat
+            else if ((oppType.equals("ROCK")) && (myPac.getTypeId().equals("ROCK"))) {
+                System.err.println("myPac try to change paper... ");
+                return toPaper;
+            }
+            else if ((oppType.equals("SCISSORS")) && (myPac.getTypeId().equals("SCISSORS"))) {
+                System.err.println("myPac try to change rock... ");
+                return toRock;
+            }
+            else if ((oppType.equals("PAPER")) && (myPac.getTypeId().equals("PAPER"))) {
+                System.err.println("myPac try to change scissor... ");
+                return toScissor;
+            }
+
         }
         return speed;
     }
