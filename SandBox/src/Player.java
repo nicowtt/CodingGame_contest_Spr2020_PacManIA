@@ -82,7 +82,7 @@ class Player {
             System.err.println("Opponent pac on board: " + board.getOpponentPac().toString());
 
             // Write an action using System.out.println()
-            System.out.println(move.moveIA1(board)); // MOVE <pacId> <x> <y>
+            System.out.println(move.moveIA2(board)); // MOVE <pacId> <x> <y>
 
             // reset all pacs
             utils.allMyPacUpdatedFalse(board);

@@ -242,4 +242,27 @@ class Utils {
             return false;
         }
     }
+
+    public boolean checkIfPacCanSpeed(int nbrOfTurn) {
+        if (nbrOfTurn > 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkIfOppIsNearMyPac (Board board, Pac myPac) {
+        // find Cell around my pac
+        List<Cell> listAroundMyPac = this.getListAllPossibleMove(board, myPac);
+
+        for (int i = 0; i < board.getOpponentPac().size(); i++) {
+            for (int j = 0; j < listAroundMyPac.size(); j++) {
+                if ((listAroundMyPac.get(j).getX() == board.getOpponentPac().get(i).getPosX()) &&
+                        (listAroundMyPac.get(j).getY() == board.getOpponentPac().get(i).getPosY())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
