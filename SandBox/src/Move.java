@@ -160,7 +160,7 @@ class Move {
                     System.err.println("best 1 pac" + board.getMyPac().get(i).getPacId() + " =" + bestPast);
                 }
             } else {
-                if (availabilityCooldown) {
+                if (availabilityCooldown && oppPacIsClosed) {
                     move += this.speedOrSwitch(board, board.getMyPac().get(i));
                 } else {
                     move += this.randomMoveAvoidLastPosition(board, board.getMyPac().get(i));
