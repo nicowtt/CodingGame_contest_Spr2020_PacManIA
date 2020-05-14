@@ -113,7 +113,7 @@ class Move {
             availabilityCooldown = utils.checkIfAbilityCooldownIsOk(board.getMyPac().get(i));
             speedIsOk = utils.checkIfPacCanSpeed(countTurn);
 
-            // remove other locked cell from other pac
+            // remove other locked cell from other pacs
 //            List<Past> listPastTenWhitoutLocked = utils.removeLockedPast(listPastTen,lockedCells);
             List<Past> listPastOneWithoutLocked = utils.removeLockedPast(listPastOne, lockedCells);
 
