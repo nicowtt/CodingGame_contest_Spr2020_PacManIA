@@ -88,7 +88,8 @@ class Move {
      * move to big value past first
      * then litle value pas
      * then random with avoid last position (exception when there is a wall)
-     * Speed if possible
+     * no speed -> eat when you can!
+     * On random move if one pac find past -> other pacs comes !
      * @param board
      * @return
      */
@@ -119,6 +120,7 @@ class Move {
 
             // opp pac is closed
             oppPacIsClosed = utils.checkIfOppIsNearMyPac(board, board.getMyPac().get(i));
+            System.err.println("opp is near?: " + oppPacIsClosed);
 
             // if there is 10 value past on the map
             if (listPastTen.size() > 0) {
