@@ -94,6 +94,52 @@ class Utils {
         return moveCell;
     }
 
+    public List<Cell> getListAllPossibleMoveWithTunnels(Board board, Pac pac) {
+        int[][] map = board.getMap();
+        List<Cell> moveCell = new ArrayList<>();
+        // North
+        if (map[pac.getPosX()][pac.getPosY() - 1] == GROUND) {
+            Cell cell = new Cell(pac.getPosX(), pac.getPosY() - 1);
+            moveCell.add(cell);
+        }
+        // East
+        if (pac.getPosX() != board.getNbrCellX() - 1) {
+            if (map[pac.getPosX() + 1][pac.getPosY()] == GROUND) {
+                Cell cell = new Cell(pac.getPosX() + 1 , pac.getPosY());
+                moveCell.add(cell);
+            }
+        }
+
+        // South
+        if (map[pac.getPosX()][pac.getPosY() + 1] == GROUND) {
+            Cell cell = new Cell(pac.getPosX(), pac.getPosY() + 1);
+            moveCell.add(cell);
+        }
+        // West
+        if (pac.getPosX() != 0) {
+            if (map[pac.getPosX() - 1][pac.getPosY()] == GROUND) {
+                Cell cell = new Cell(pac.getPosX() - 1, pac.getPosY());
+                moveCell.add(cell);
+            }
+        }
+        // tunnels
+        if ((pac.getPosX()+board.getNbrCellX())% board.getNbrCellX() == 0) { // find tunnel
+            // pac is on right side
+            if (pac.getPosX() == board.getNbrCellX()) {
+                Cell cell = new Cell(0, pac.getPosY());
+                moveCell.add(cell);
+            }
+            // pac is on left side
+            if (pac.getPosX() == 0) {
+                Cell cell = new Cell(board.getNbrCellX() -1, pac.getPosY());
+                moveCell.add(cell);
+            }
+        }
+//        System.err.println("Cell possible with pac" + pac.getPacId() + ": " + moveCell.toString());
+        return moveCell;
+    }
+
+
     public List<Past> removeLockedPast(List<Past> listPastIn, List<Cell> lockedCells) {
         List<Past> returnList = new ArrayList<>();
         returnList.addAll(listPastIn);

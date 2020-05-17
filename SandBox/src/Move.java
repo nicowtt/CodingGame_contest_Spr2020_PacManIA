@@ -207,7 +207,7 @@ class Move {
         // random move where is possible
         System.err.println("pac " + myPac.getPacId() + " move aléatoirement");
         // list of future possible move
-        List<Cell> listAllPossibleMove = utils.getListAllPossibleMove(board, myPac);
+        List<Cell> listAllPossibleMove = utils.getListAllPossibleMoveWithTunnels(board, myPac);
         // remove old position on this list
         if (listAllPossibleMove.size() > 1) {
             listAllPossibleMove.removeIf(cell -> (cell.getX() == myPac.getPreviousPos().getX()) && (cell.getY() == myPac.getPreviousPos().getY()));
