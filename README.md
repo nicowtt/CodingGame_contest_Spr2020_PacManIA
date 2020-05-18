@@ -1,7 +1,8 @@
 # Coding Game compétition "Pacman" -> Spring Challenge 2020
-Le Spring Challenge 2020 est une compétition de creation d'IA (Bot) mondiale d'une durée d'un mois
+Le Spring Challenge 2020 est une compétition de création d'IA (Bot) mondiale d'une durée d'un mois
 ouverte à tous et à tout les languages de programmation.
 Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.
+2 ligues bois, bronze, argent, or et enfin legend.
 
 ![alt text](https://github.com/nicowtt/CodingGame_contest_Spr2020_PacManIA/blob/master/pacman.png)
 
@@ -12,50 +13,48 @@ Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.
 ### Explication du jeux
 - Une map aléatoire avec des tunnels possible en latéral.
 ![alt text](https://github.com/nicowtt/CodingGame_contest_Spr2020_PacManIA/blob/master/map.png)
-- De 1 à 5 pacmans par joueur.
+
+- De 1 à 5 pacman(s) par joueur.
 - 5 grosses pastilles -> valeur 10 points
 - Tous les chemins sont remplis par d'autres pastilles -> valeur 1 point.
-- Les pacMans peuvent prendre du speed -> 2 cases pour 1 chez le concurent.
-- Les pacMan peuvent se transformer en pierre/ciseaux/papier pour jouer a shiFouMi lors de collision.
+- Les pacMans peuvent prendre du speed -> 2 cases pour 1 chez le concurent. (cooldown 10 tours)
+- Les pacMan peuvent se transformer en pierre/ciseaux/papier pour jouer a shiFouMi lors de collision. (cooldown 5 tours)
 On peut donc manger l'adversaire. 
-- Celui qui à la majorité de point gagne!
+- Celui qui à la majorité de point gagne la partie!
 
 ### Algorithme et fonctions développé (stratégie):
 
     * Mes pacs se dirigent tous sur la grosse pastille la plus proche.
-        - plusieurs pac peuvent se diriger vers la même grosse pastilles.
+        - Plusieurs pac peuvent se diriger vers la même grosse pastilles.
     * Ensuite mes pacs se dirigent vers la petites pastille la plus proche.
-    (Il ne peuvent pas se diriger vers une pastille verouillé par un autre pac)
-    * Lorsqu'il n'y a plus de pastille visible par un pac (le pac voie que les pastilles du chemin visible):
-        - si un des pac a de la visiblité sur une pastille, le pac se dirige vers la plus proche.
-    * Si aucun pac ne voient de pastilles:
-        - mouvement aléatoire en évitant la derniere cellule.
+    (Ils ne peuvent pas se diriger vers une pastille verrouillé par un autre pac)
+    * Lorsqu'il n'y a plus de pastille visible par un pac (le pac voie uniquement les pastilles du chemin visible):
+        - Si un des pac à de la visiblité sur une pastille, les autre pacs se dirigent vers la plus proche.
+    * Si aucune pastilles n'est visible par aucun pac:
+        - mouvement aléatoire en évitant la dernière cellule.
         - il peut prendre les tunnels.
-    
 
-![alt text](https://github.com/nicowtt/CodingGame_contest_SubMarineIA/blob/master/Tof3.jpg)
-
-### Contrainte:
-Response time first turn ≤ 1000 ms
-Response time per turn ≤ 50 ms
 
 ### Les règles officielles:
-https://www.codingame.com/ide/challenge/ocean-of-code
+to be updated
 
 ### Le code source:
-https://github.com/CodinGameCommunity/ocean-of-code.
+to be updated
 
 ### Resultat:
-Ceci est ma première compétition de code. (j'ai de la marge de progression... ;o)  
-7 258 participants dans le monde!
-2279 classés
+C'est ma deuxième participation dans une compétition de code.
+13 699 inscription dans le monde!
+4955 qui ont soumis leur code.
 mon résultat:
-![alt text](https://github.com/nicowtt/CodingGame_contest_SubMarineIA/blob/master/Tof2.jpg)
-
-### Dernière partie:
-https://www.codingame.com/replay/452687072
+![alt text](https://github.com/nicowtt/CodingGame_contest_Spr2020_PacManIA/blob/master/result.png)
+-> je suis classé 30/100
 
 ### Impressions personnelles:
-C'est un défis trés difficile... mais tellement fun!
-La refactorisation du code quand ça devient de plus en plus complexe prend un peu de temp (mais ça ma évité de me perdre!).
-J'ai beaucoup appris durant ce challenge.
+Toujours trés agréable et difficile de crée une IA afin de battre d'autre concurents humain. Il y a beaucoup 
+de temp à observer les parties afin de trouver une stratégie qui peut marcher.
+J'ai pris beaucoup de plaisir à coder mes features !
+Je n'ai pas refactorisé mon code. J'ai donc amélioré ma capacité et ma vision objet afin de ne pas me perdre.
+
+J'ai réussi pour cette deuxième participation à me classer sur une ligue supérieure.
+1er contest -> ligue bronze -> finish 42eme/100
+ici -> ligue argent! -> finish 30eme/100
