@@ -24,15 +24,15 @@ On peut donc manger l'adversaire.
 
 ### Algorithme et fonctions développées (stratégie):
 
-    * Mes pacs se dirigent tous sur la grosse pastille la plus proche.
-        - Plusieurs pac peuvent se diriger vers la même grosse pastilles.
-    * Ensuite mes pacs se dirigent vers la petites pastille la plus proche.
-    (Ils ne peuvent pas se diriger vers une pastille verrouillé par un autre pac)
-    * Lorsqu'il n'y a plus de pastille visible par un pac (le pac voie uniquement les pastilles du chemin visible):
-        - Si un des pac à de la visiblité sur une pastille, les autre pacs se dirigent vers la plus proche.
+    * Mes pacs se dirigent tous sur une grosse pastille la plus proche.
+        - Plusieurs pac peuvent se déplacer vers la même grosse pastilles.
+    * Ensuite mes pacs se dirigent vers la plus proche petite pastille.
+    (Ils ne peuvent pas aller vers une pastille verrouillé par un autre pac)
+    * Lorsqu'il n'y a plus de pastilles visible par un pac (le pac voit uniquement les pastilles du chemin visible):
+        - Si un des pac à de la visiblité sur une pastille, les autres pacs se dirigent vers la plus proche.
     * Si aucune pastilles n'est visible par aucun pac:
-        - mouvement aléatoire en évitant la dernière cellule.
-        - il peut prendre les tunnels.
+        - Mouvement aléatoire en évitant la dernière cellule.
+        - Possibilité de prendre les tunnels.
 
 
 ### Les règles officielles:
@@ -43,7 +43,7 @@ to be updated
 
 ### Resultat:
 C'est ma deuxième participation dans une compétition de code.
-13 699 inscription dans le monde!
+13 699 inscription à travers le monde!
 4955 qui ont soumis leur code.
 mon résultat:<br/>
 
