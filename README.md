@@ -1,7 +1,7 @@
 # Coding Game compétition "Pacman" -> Spring Challenge 2020
 Le Spring Challenge 2020 est une compétition de création d'IA (Bot) mondiale d'une durée d'un mois
-ouverte à tous et à tout les languages de programmation.
-Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.
+ouverte à tous et à tout les languages de programmation.<br/>
+Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.<br/>
 2 ligues bois, bronze, argent, or et enfin legend.
 
 ![alt text](https://github.com/nicowtt/CodingGame_contest_Spr2020_PacManIA/blob/master/pacman.png)
@@ -11,7 +11,7 @@ Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.
 - Programation Orienté Objet (POO).
 
 ### Explication du jeux
-- Une map aléatoire avec des tunnels possible en latéral.
+- Une map aléatoire avec des tunnels possible en latéral. <br/>
 ![alt text](https://github.com/nicowtt/CodingGame_contest_Spr2020_PacManIA/blob/master/map.png)
 
 - De 1 à 5 pacman(s) par joueur.
@@ -22,7 +22,7 @@ Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.
 On peut donc manger l'adversaire. 
 - Celui qui à la majorité de point gagne la partie!
 
-### Algorithme et fonctions développé (stratégie):
+### Algorithme et fonctions développées (stratégie):
 
     * Mes pacs se dirigent tous sur la grosse pastille la plus proche.
         - Plusieurs pac peuvent se diriger vers la même grosse pastilles.
@@ -45,16 +45,18 @@ to be updated
 C'est ma deuxième participation dans une compétition de code.
 13 699 inscription dans le monde!
 4955 qui ont soumis leur code.
-mon résultat:
+mon résultat:<br/>
+
 ![alt text](https://github.com/nicowtt/CodingGame_contest_Spr2020_PacManIA/blob/master/result.png)
+
 -> je suis classé 30/100
 
 ### Impressions personnelles:
 Toujours trés agréable et difficile de crée une IA afin de battre d'autre concurents humain. Il y a beaucoup 
-de temp à observer les parties afin de trouver une stratégie qui peut marcher.
-J'ai pris beaucoup de plaisir à coder mes features !
+de temp à observer les parties afin de trouver une stratégie qui peut marcher.<br/>
+J'ai pris beaucoup de plaisir à coder mes features !<br/>
 Je n'ai pas refactorisé mon code. J'ai donc amélioré ma capacité et ma vision objet afin de ne pas me perdre.
 
-J'ai réussi pour cette deuxième participation à me classer sur une ligue supérieure.
-1er contest -> ligue bronze -> finish 42eme/100
+J'ai réussi pour cette deuxième participation à me classer sur une ligue supérieure.<br/>
+1er contest -> ligue bronze -> finish 42eme/100 <br/>
 ici -> ligue argent! -> finish 30eme/100
