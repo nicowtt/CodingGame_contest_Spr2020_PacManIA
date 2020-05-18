@@ -1,5 +1,5 @@
 # Coding Game compétition "Pacman" -> Spring Challenge 2020
-Le Spring Challenge 2020 est une compétition de création d'IA (Bot) mondiale d'une durée d'un mois
+Le Spring Challenge 2020 est une compétition de création d'IA (Bot) mondiale d'une durée de 10 jours
 ouverte à tous et à tout les languages de programmation.<br/>
 Il y a 6 ligues avec 1 bot (boss) pour chaque niveau.<br/>
 2 ligues bois, bronze, argent, or et enfin legend.
